@@ -13,7 +13,6 @@ const historyNode = document.querySelector ('.js-history')
 const totalSumNode = document.querySelector ('.js-total')
 const limitNode = document.querySelector ('.js-limit')
 const statusNode = document.querySelector ('.js-status')
-
 const selectedCategoryNode = document.querySelector ('.js-selected-category')
 
 const spending = []
@@ -28,13 +27,16 @@ addButtonNode.addEventListener ('click', function () {
     if (!inputNode.value) {
         return
     }
-
+    
     const spend = parseInt(inputNode.value)
     inputNode.value = ''
-
+    
     const currentCategory = getSelectedCategory ()
+    if (currentCategory === 'Выберите категорию') {
+        alert ('Выберите категорию')
+        return
+    }
 
-    //2. Пушим в массив вводимые значения
     trackSpend (spend)
 
     render (spending)
@@ -88,14 +90,15 @@ function cancelHistory () {
 
 function renderHistory (spending) {
     let spendingListHTML = ''
-    
+
     spending.forEach(element => {
-        spendingListHTML += `<li>${element}${CURRECY}</li>`
+        spendingListHTML += `<li>${selectedCategoryNode.value} - ${element} ${CURRECY}</li>`
     });
+
+    
 
     historyNode.innerHTML = `<ol>${spendingListHTML}</ol>`
     
-    console.log (spendingListHTML)
 }
 
 function renderSum (spending) {
@@ -121,5 +124,5 @@ function render (spending) {
 }
 
 function getSelectedCategory () {
-    return selectedCategoryNode
+    return selectedCategoryNode.value
 }

@@ -51,11 +51,7 @@ h1 {
 
 }
 
-.select-category {
-    
-}
-
-.select {
+.js-selected-category {
     font-size: inherit;
     width: 100%;
     display: flex;
