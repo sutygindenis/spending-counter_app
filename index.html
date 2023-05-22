@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Spending App</title>
+    <link rel="stylesheet" href="reset.css">
+    <link rel="stylesheet" href="index.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <section>
+        <h1><b>Учет расходов</b></h1>
+        <div class="container">
+            <div class="input-box-wraper">
+                <div class="input-value-box">
+                    <div class="spending-input curency">
+                        <input
+                            class="js-input"
+                            type="number"
+                            min="1"
+                            name=""
+                            id=""
+                            placeholder="10">
+                    </div>
+                </div>
+                <div class="select-box">
+                    <div class="select-category">
+                        <select class="select" name="Выберите категорию" id="">
+                            <option disabled="" hidden="" selected="">Выберите категорию</option>
+                            <option value="транспорт">транспорт</option>
+                            <option value="кафе и рестораны">кафе и рестораны</option>
+                            <option value="аптека">аптека</option>
+                            <option value="развлечения">развлечения</option>
+                        </select>
+                    </div>
+                </div>
+            </div>
+            <button class="js-add-button">Добавить</button>
+            <div class="info-col">
+                <div class="limit-box">
+                    <div class="limit curency">
+                        <span class="label"><b>Лимит:</b></span>
+                        <span class="js-limit"></span>
+                    </div>
+                    <button class="limit-redactor-btn"></button>
+                </div>
+                <div class="total curency">
+                    <span class="label"><b>Всего:</b></span>
+                    <span class="js-total"></span>
+                </div>
+                <div class="status">
+                    <span class="label"><b>Статус:</b></span>
+                    <span class="js-status status-green"></span>
+                </div>
+            </div>
+            <div class="history-col">
+                <span class="history"><b>История:</b></span>
+                <ol class="js-history"></ol>
+            </div>
+        </div>
+
+        <button class="js-cancel-button">Сбросить расходы</button>
+    </section>
+
+
+    <script src="/index.js"></script>
+</body>
+</html>

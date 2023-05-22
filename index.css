@@ -1,0 +1,149 @@
+body {
+    font-family: 'Inter', sans-serif;
+    font-size: 32px;
+    line-height: 39px;
+}
+
+b {
+    font-weight: 700;
+}
+
+section {
+    width: 1400px;
+    padding: 67px 0 0 286px;
+    /* display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column; */
+}
+
+
+h1 {
+    margin-bottom: 41px;
+}
+
+.curency::after {
+    content: ' руб.';
+}
+
+.container {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    column-gap: 28px;
+    row-gap: 50px;
+
+    /* margin: 0 auto ; */
+}
+
+.input-box-wraper {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+.input-value-box {
+    width: 484px;
+}
+
+.select-box {
+    width: 484px;
+
+}
+
+.select-category {
+    
+}
+
+.select {
+    font-size: inherit;
+    width: 100%;
+    display: flex;
+    align-items: center;
+    padding: 10px 17px 9px 22px;
+    border: 1px solid black;
+
+}
+
+.spending-input {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    padding: 10px 17px 9px 22px;
+    border: 1px solid black;
+
+}
+
+.js-input {
+    outline: none;
+    border: none;
+    width: 100%;
+    font-size: inherit;
+}
+
+.js-add-button {
+    width: 370px;
+    height: 58px;
+    border: none;
+    background-color: #0094FF;
+    font-size: 32px;
+    line-height: 58px;
+    color: white;
+}
+
+.js-cancel-button {
+    width: 484px;
+    height: 58px;
+    border: none;
+    background-color: #FF0000;
+    font-size: 32px;
+    line-height: 58px;
+    color: white;
+}
+
+.info-box {
+    display: flex;
+    gap: 28px;
+}
+
+.info-col {
+    width: 484px;
+}
+
+.limit-box {
+    display: flex;
+    align-items:start;
+}
+
+.limit {
+    margin-bottom: 20px;
+}
+
+.limit-redactor-btn {
+    width: 42px;
+    height: 42px;
+    margin-left: 12px;
+    cursor: pointer;
+    background-size: contain;
+    background-image: url('/limit-redaction.jpg');
+}
+
+.total {
+    margin-bottom: 35px;
+}
+
+.history {
+    margin-bottom: 20px;
+}
+
+.status {
+    margin-bottom: 112px;
+}
+
+.status-green {
+    color: green;
+}
+
+.status-red {
+    color: red;
+}
