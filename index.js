@@ -14,6 +14,7 @@ const totalSumNode = document.querySelector ('.js-total')
 const limitNode = document.querySelector ('.js-limit')
 const statusNode = document.querySelector ('.js-status')
 const selectedCategoryNode = document.querySelector ('.js-selected-category')
+const nonSelectedCategoryNode = document.querySelector ('.js-non-selected-category')
 
 const spending = []
 
@@ -32,14 +33,18 @@ addButtonNode.addEventListener ('click', function () {
     inputNode.value = ''
     
     const currentCategory = getSelectedCategory ()
-    if (currentCategory === 'Выберите категорию') {
-        alert ('Выберите категорию')
+    if (currentCategory === 'Категории') {
+        nonSelectedCategoryNode.removeAttribute ('hidden', '')
         return
+    } else {
+        nonSelectedCategoryNode.setAttribute ('hidden', '')
+
+        trackSpend (spend)
+    
+        render (spending)
     }
 
-    trackSpend (spend)
 
-    render (spending)
     
 })
 
