@@ -3,7 +3,8 @@ const CURRECY = ' руб.'
 const STATUS_IN_LIMIT = 'Все хорошо'
 const STATUS_OUT_OF_LIMIT = 'Все плохо'
 const STATUS_OUT_OF_LIMIT_CLASSNAME = 'status-red'
-
+const POPUP_OPENED = 'popup_open'
+const BODY_FIXED = 'body_fixed';
 
 const inputNode = document.querySelector ('.js-input')
 
@@ -15,6 +16,15 @@ const limitNode = document.querySelector ('.js-limit')
 const statusNode = document.querySelector ('.js-status')
 const selectedCategoryNode = document.querySelector ('.js-selected-category')
 const nonSelectedCategoryNode = document.querySelector ('.js-non-selected-category')
+
+
+const bodyNode = document.querySelector('body');
+const changeLimitPopupNode = document.querySelector('.change-limit-popup');
+const changeLimitPopupContentNode = document.querySelector('.js-popup-content')
+const changeLimitButtonNode = document.querySelector ('.js-change-limit-btn')
+const changeLimitBtnCloseNode = document.querySelector('.js-change-limit-popup-close-btn');
+
+
 
 const spending = []
 
@@ -53,6 +63,23 @@ cancelButtonNode.addEventListener ('click', function () {
     render (spending)
 })
 
+// Кнопка смены лимита
+
+changeLimitButtonNode.addEventListener ('click', togglePopup)
+changeLimitBtnCloseNode.addEventListener('click', togglePopup);
+
+changeLimitPopupNode.addEventListener('click', (event) => {
+    const isClickOutsideContent = !event.composedPath().includes(changeLimitPopupContentNode)
+
+    if (isClickOutsideContent) {
+        togglePopup();
+    }
+})
+
+function togglePopup() {
+    changeLimitPopupNode.classList.toggle(POPUP_OPENED)
+    bodyNode.classList.toggle(BODY_FIXED);
+}
 
 
 function trackSpend (spend) {
@@ -117,7 +144,7 @@ function renderStatus (spending) {
         statusNode.innerText = STATUS_IN_LIMIT
         statusNode.classList.remove(STATUS_OUT_OF_LIMIT_CLASSNAME)
     } else {
-        statusNode.innerText = `${STATUS_OUT_OF_LIMIT} (${LIMIT - sum}) ${CURRECY}`
+        statusNode.innerText = `${STATUS_OUT_OF_LIMIT} (${LIMIT - sum} ${CURRECY})`
         statusNode.classList.add(STATUS_OUT_OF_LIMIT_CLASSNAME)
     }
 }

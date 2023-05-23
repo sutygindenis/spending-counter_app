@@ -17,7 +17,7 @@
         <div class="container">
             <div class="input-box-wraper">
                 <div class="input-value-box">
-                    <div class="spending-input curency">
+                    <div class="value-input curency">
                         <input
                             class="js-input"
                             type="number"
@@ -50,7 +50,34 @@
                         <span class="label"><b>Лимит:</b></span>
                         <span class="js-limit"></span>
                     </div>
-                    <button class="limit-redactor-btn"></button>
+                    <button class="js-change-limit-btn"></button>
+
+
+
+                    <div class="change-limit-popup">
+                        <div class="js-popup-content ">
+                            <h2 class="popup-title">Новый лимит</h2>
+
+                            <div class="limit-control">
+                                <div class="input-value-box">
+                                    <div class="value-input curency">
+                                        <input
+                                            class="js-input"
+                                            type="number"
+                                            min="100"
+                                            name=""
+                                            id=""
+                                            placeholder="100">
+                                    </div>
+                                </div>
+                                <button class="Js-popup-set-limit-btn">Задать лимит</button>
+                            </div>
+                            <button class="js-change-limit-popup-close-btn"></button>
+                        </div>
+                    </div>
+
+
+                        
                 </div>
                 <div class="total curency">
                     <span class="label"><b>Всего:</b></span>

@@ -4,6 +4,10 @@ body {
     line-height: 39px;
 }
 
+.body_fixed {
+    overflow: hidden;
+}
+
 b {
     font-weight: 700;
 }
@@ -59,7 +63,6 @@ h1 {
 
 .select-box {
     width: 484px;
-
 }
 
 .js-selected-category {
@@ -72,7 +75,7 @@ h1 {
 
 }
 
-.spending-input {
+.value-input {
     width: 100%;
     display: flex;
     align-items: center;
@@ -126,7 +129,7 @@ h1 {
     margin-bottom: 20px;
 }
 
-.limit-redactor-btn {
+.js-change-limit-btn {
     width: 42px;
     height: 42px;
     margin-left: 12px;
@@ -153,4 +156,62 @@ h1 {
 
 .status-red {
     color: red;
+}
+
+.change-limit-popup {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 0 15px 0 17px;
+    background-color: rgba(0, 0, 0, 0.6);
+    opacity: 1;
+    visibility: hidden;
+    /* z-index: 200; */
+}
+
+.js-popup-content {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    flex-wrap: wrap;
+    gap: 150px;
+    padding: 47px 0 0 57px;
+    background-color: white;
+    width: 991px;
+    height: 525px;
+}
+
+.limit-control {
+    display: flex;
+    align-items: center;
+    justify-content:flex-start;
+    gap: 28px
+}
+
+.Js-popup-set-limit-btn {
+    padding: 10px 77px 9px 77px;
+    background-color: #0094FF;
+    color: white;
+}
+
+.js-change-limit-popup-close-btn {
+    position: absolute;
+    width: 30px;
+    height: 30px;
+    top: 47px;
+    right: 40px;
+    background-image: url('./Vector.jpg');
+    background-size: contain;
+    cursor: pointer;
+}
+
+.popup_open {
+    opacity: 1;
+    visibility: visible;
+    transition: all 0.2s;
 }
