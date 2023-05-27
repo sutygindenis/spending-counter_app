@@ -1,12 +1,13 @@
-const LIMIT = 10000
 const CURRECY = ' руб.'
 const STATUS_IN_LIMIT = 'Все хорошо'
 const STATUS_OUT_OF_LIMIT = 'Все плохо'
 const STATUS_OUT_OF_LIMIT_CLASSNAME = 'status-red'
 const POPUP_OPENED = 'popup_open'
-const BODY_FIXED = 'body_fixed';
+const BODY_FIXED = 'body_fixed'
+const STORAGE_LIMIT = 'lastSetLimit'
 
-const inputNode = document.querySelector ('.js-input')
+const spendInputNode = document.querySelector ('.js-spend-input')
+const limitInputNode = document.querySelector ('.js-limit-input')
 
 const addButtonNode = document.querySelector ('.js-add-button')
 const cancelButtonNode = document.querySelector ('.js-cancel-button')
@@ -23,7 +24,9 @@ const changeLimitPopupNode = document.querySelector('.change-limit-popup');
 const changeLimitPopupContentNode = document.querySelector('.js-popup-content')
 const changeLimitButtonNode = document.querySelector ('.js-change-limit-btn')
 const changeLimitBtnCloseNode = document.querySelector('.js-change-limit-popup-close-btn');
+const setLimitBtnNode = document.querySelector ('.Js-popup-set-limit-btn')
 
+let LIMIT = 10000
 
 
 const spending = []
@@ -35,12 +38,13 @@ init(spending)
 addButtonNode.addEventListener ('click', function () {
     
     //1. Приводим значение к числу
-    if (!inputNode.value) {
+    if (!spendInputNode.value) {
+        
         return
     }
     
-    const spend = parseInt(inputNode.value)
-    inputNode.value = ''
+    const spend = parseInt(spendInputNode.value)
+    spendInputNode.value = ''
     
     const currentCategory = getSelectedCategory ()
     if (currentCategory === 'Категории') {
@@ -52,6 +56,7 @@ addButtonNode.addEventListener ('click', function () {
         trackSpend (spend)
     
         render (spending)
+
     }
 
 
@@ -63,14 +68,14 @@ cancelButtonNode.addEventListener ('click', function () {
     render (spending)
 })
 
-// Кнопка смены лимита
+// Popup
 
 changeLimitButtonNode.addEventListener ('click', togglePopup)
 changeLimitBtnCloseNode.addEventListener('click', togglePopup);
 
 changeLimitPopupNode.addEventListener('click', (event) => {
     const isClickOutsideContent = !event.composedPath().includes(changeLimitPopupContentNode)
-
+    
     if (isClickOutsideContent) {
         togglePopup();
     }
@@ -81,28 +86,35 @@ function togglePopup() {
     bodyNode.classList.toggle(BODY_FIXED);
 }
 
-
-function trackSpend (spend) {
-    spending.push (spend)
-}
-
-function getSpendFromInput () {
-    if (!inputNode.value) {
-        return null
+setLimitBtnNode.addEventListener ('click', function () {
+    if (!limitInputNode.value) {
+        return
     }
 
-    const spend = parseInt(inputNode.value)
+    LIMIT = parseInt(limitInputNode.value)
+    limitInputNode.value = ''
 
+    changeLimitPopupNode.classList.toggle(POPUP_OPENED)
 
-    inputNode.value = ''
+    localStorage.setItem(STORAGE_LIMIT, LIMIT)
 
-    return spend
-}
+    render (spending)
+
+    
+    
+})
 
 function init(spending) {addButtonNode
-    limitNode.innerText = LIMIT
+    
+    if (STORAGE_LIMIT === '10000') {
+        limitNode.innerText = LIMIT
+
+    } else {
+        limitNode.innerText = localStorage.getItem (STORAGE_LIMIT)
+    }
     statusNode.innerText = STATUS_IN_LIMIT
     totalSumNode.innerText = calculateSpending (spending)
+
 }
 
 function calculateSpending (spending) {
@@ -114,6 +126,34 @@ function calculateSpending (spending) {
 
     return sum
 }
+
+function getLimitValue () {
+    LIMIT = limitInputNode.value
+
+}
+
+
+function trackSpend (spend) {
+
+    spending.push (spend)
+}
+
+function getSpendFromInput () {
+    if (!spendInputNode.value) {
+        return null
+    }
+
+    const spend = parseInt(spendInputNode.value)
+
+
+    spendInputNode.value = ''
+
+    return spend
+
+}
+
+
+
 
 function cancelHistory () {
     spending.splice (0)
@@ -127,9 +167,8 @@ function renderHistory (spending) {
         spendingListHTML += `<li>${selectedCategoryNode.value} - ${element} ${CURRECY}</li>`
     });
 
-    
-
     historyNode.innerHTML = `<ol>${spendingListHTML}</ol>`
+    
     
 }
 
@@ -150,6 +189,7 @@ function renderStatus (spending) {
 }
 
 function render (spending) {
+    init(spending)
     renderHistory (spending)
     renderSum (spending)
     renderStatus (spending)

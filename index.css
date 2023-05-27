@@ -84,7 +84,7 @@ h1 {
 
 }
 
-.js-input {
+.input {
     outline: none;
     border: none;
     width: 100%;
@@ -99,6 +99,11 @@ h1 {
     font-size: 32px;
     line-height: 58px;
     color: white;
+    cursor: pointer;
+}
+
+.js-add-button:hover {
+    opacity: 0.6;
 }
 
 .js-cancel-button {
@@ -109,6 +114,11 @@ h1 {
     font-size: 32px;
     line-height: 58px;
     color: white;
+    cursor: pointer;
+}
+
+.js-cancel-button:hover {
+    opacity: 0.6;
 }
 
 .info-box {
@@ -136,6 +146,10 @@ h1 {
     cursor: pointer;
     background-size: contain;
     background-image: url('./limit-redaction.jpg');
+}
+
+.js-change-limit-btn:hover {
+    opacity: 0.6;
 }
 
 .total {
@@ -197,6 +211,11 @@ h1 {
     padding: 10px 77px 9px 77px;
     background-color: #0094FF;
     color: white;
+    cursor: pointer;
+}
+
+.Js-popup-set-limit-btn:hover {
+    opacity: 0.6;
 }
 
 .js-change-limit-popup-close-btn {
@@ -208,6 +227,10 @@ h1 {
     background-image: url('./Vector.jpg');
     background-size: contain;
     cursor: pointer;
+}
+
+.js-change-limit-popup-close-btn:hover {
+    opacity: 0.6;
 }
 
 .popup_open {
