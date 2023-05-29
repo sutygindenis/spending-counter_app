@@ -33,19 +33,19 @@ let LIMIT = 10000
 
 let spending = []
 
-const spendingFromStorageString = localStorage.getItem (STORAGE_HISTORY)
-const spendingStorage = JSON.parse (spendingFromStorageString)
-spending = spendingStorage
+// const spendingFromStorageString = localStorage.getItem (STORAGE_HISTORY)
+// const spendingStorage = JSON.parse (spendingFromStorageString)
+// spending = spendingStorage
 
 init(spending)
 
 
-function saveHistoryToStorage () {
+// function saveHistoryToStorage () {
 
-    const spendingStorageString = JSON.stringify (spending)
+//     const spendingStorageString = JSON.stringify (spending)
     
-    localStorage.setItem(STORAGE_HISTORY, spendingStorageString)
-}
+//     localStorage.setItem(STORAGE_HISTORY, spendingStorageString)
+// }
 
 addButtonNode.addEventListener ('click', function () {
     
@@ -72,7 +72,7 @@ addButtonNode.addEventListener ('click', function () {
         // console.log (newSpend)
         
         spending.push (newSpend)
-        saveHistoryToStorage ()
+        // saveHistoryToStorage ()
 
         // console.log (spending)
     
