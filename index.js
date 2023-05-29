@@ -5,6 +5,8 @@ const STATUS_OUT_OF_LIMIT_CLASSNAME = 'status-red'
 const POPUP_OPENED = 'popup_open'
 const BODY_FIXED = 'body_fixed'
 const STORAGE_LIMIT = 'lastSetLimit'
+const STORAGE_HISTORY = 'history'
+
 
 const spendInputNode = document.querySelector ('.js-spend-input')
 const limitInputNode = document.querySelector ('.js-limit-input')
@@ -22,18 +24,28 @@ const nonSelectedCategoryNode = document.querySelector ('.js-non-selected-catego
 const bodyNode = document.querySelector('body');
 const changeLimitPopupNode = document.querySelector('.change-limit-popup');
 const changeLimitPopupContentNode = document.querySelector('.js-popup-content')
-const changeLimitButtonNode = document.querySelector ('.js-change-limit-btn')
+const changeLimitBtnNode = document.querySelector ('.js-change-limit-btn')
 const changeLimitBtnCloseNode = document.querySelector('.js-change-limit-popup-close-btn');
 const setLimitBtnNode = document.querySelector ('.Js-popup-set-limit-btn')
 
 let LIMIT = 10000
 
 
-const spending = []
+let spending = []
+
+const spendingFromStorageString = localStorage.getItem (STORAGE_HISTORY)
+const spendingStorage = JSON.parse (spendingFromStorageString)
+spending = spendingStorage
 
 init(spending)
 
 
+function saveHistoryToStorage () {
+
+    const spendingStorageString = JSON.stringify (spending)
+    
+    localStorage.setItem(STORAGE_HISTORY, spendingStorageString)
+}
 
 addButtonNode.addEventListener ('click', function () {
     
@@ -46,22 +58,41 @@ addButtonNode.addEventListener ('click', function () {
     const spend = parseInt(spendInputNode.value)
     spendInputNode.value = ''
     
+    
     const currentCategory = getSelectedCategory ()
     if (currentCategory === 'Категории') {
         nonSelectedCategoryNode.removeAttribute ('hidden', '')
         return
     } else {
         nonSelectedCategoryNode.setAttribute ('hidden', '')
+        
+        
+        const newSpend = {currentSpend: spend, category: selectedCategoryNode.value}
 
-        trackSpend (spend)
+        // console.log (newSpend)
+        
+        spending.push (newSpend)
+        saveHistoryToStorage ()
+
+        // console.log (spending)
     
         render (spending)
 
+        console.log (spend)
+
     }
-
-
     
 })
+
+
+
+// function getHistoryFromStorage () {
+//     const spendingFromStorageString = localStorage.getItem (STORAGE_HISTORY)
+//     const spendingStorage = JSON.parse (spendingFromStorageString)
+//     spending = spendingStorage
+// }
+
+
 
 cancelButtonNode.addEventListener ('click', function () {
     cancelHistory (historyNode)
@@ -70,8 +101,8 @@ cancelButtonNode.addEventListener ('click', function () {
 
 // Popup
 
-changeLimitButtonNode.addEventListener ('click', togglePopup)
-changeLimitBtnCloseNode.addEventListener('click', togglePopup);
+changeLimitBtnNode.addEventListener ('click', togglePopup)
+changeLimitBtnCloseNode.addEventListener('click', togglePopup)
 
 changeLimitPopupNode.addEventListener('click', (event) => {
     const isClickOutsideContent = !event.composedPath().includes(changeLimitPopupContentNode)
@@ -104,56 +135,46 @@ setLimitBtnNode.addEventListener ('click', function () {
     
 })
 
+// сделать отрисовку истории
+
 function init(spending) {addButtonNode
     
-    if (STORAGE_LIMIT === '10000') {
-        limitNode.innerText = LIMIT
 
+    if (!localStorage.getItem(STORAGE_LIMIT)) {
+        limitNode.innerText = LIMIT
     } else {
+        LIMIT = localStorage.getItem (STORAGE_LIMIT)
         limitNode.innerText = localStorage.getItem (STORAGE_LIMIT)
+        
+
     }
+    // getHistoryFromStorage (spending)
     statusNode.innerText = STATUS_IN_LIMIT
     totalSumNode.innerText = calculateSpending (spending)
-
-}
-
-function calculateSpending (spending) {
-    let sum = 0
     
-    spending.forEach(element => {
-        sum += element
-    });
-
-    return sum
 }
+
 
 function getLimitValue () {
     LIMIT = limitInputNode.value
-
+    
 }
 
-
-function trackSpend (spend) {
-
-    spending.push (spend)
-}
+const spend = getSpendFromInput()
 
 function getSpendFromInput () {
     if (!spendInputNode.value) {
         return null
     }
-
+    
     const spend = parseInt(spendInputNode.value)
-
-
+    
+    
     spendInputNode.value = ''
-
+    
     return spend
-
+    
 }
-
-
-
 
 function cancelHistory () {
     spending.splice (0)
@@ -162,14 +183,24 @@ function cancelHistory () {
 
 function renderHistory (spending) {
     let spendingListHTML = ''
+    
+    const newSpend = {currentSpend: spend, category: selectedCategoryNode.value}
 
-    spending.forEach(element => {
-        spendingListHTML += `<li>${selectedCategoryNode.value} - ${element} ${CURRECY}</li>`
+    spending.forEach(newSpend => {
+        spendingListHTML += `<li>${newSpend.category} - ${newSpend.currentSpend} ${CURRECY}</li>`
+    });
+    
+    historyNode.innerHTML = `<ol>${spendingListHTML}</ol>`
+}
+
+function calculateSpending (spending) {
+    let sum = 0
+    
+    spending.forEach(function (newSpend) {
+        sum += newSpend.currentSpend
     });
 
-    historyNode.innerHTML = `<ol>${spendingListHTML}</ol>`
-    
-    
+    return sum
 }
 
 function renderSum (spending) {
