@@ -33,31 +33,32 @@ let LIMIT = 10000
 
 let spending = []
 
-// const spendingFromStorageString = localStorage.getItem (STORAGE_HISTORY)
-// const spendingStorage = JSON.parse (spendingFromStorageString)
-// spending = spendingStorage
+const getHistoryFromStorage = function () {
+    const spendingFromStorageString = localStorage.getItem (STORAGE_HISTORY)
+    const spendingStorage = JSON.parse (spendingFromStorageString)
+    spending = spendingStorage
+}
 
-init(spending)
+const spend = getSpendFromInput()
 
+if (localStorage.history) {
+    getHistoryFromStorage ()
+}
+render (spending)
 
-// function saveHistoryToStorage () {
-
-//     const spendingStorageString = JSON.stringify (spending)
-    
-//     localStorage.setItem(STORAGE_HISTORY, spendingStorageString)
-// }
+function saveHistoryToStorage () {
+    const spendingStorageString = JSON.stringify (spending)
+    localStorage.setItem(STORAGE_HISTORY, spendingStorageString)
+}
 
 addButtonNode.addEventListener ('click', function () {
     
-    //1. Приводим значение к числу
     if (!spendInputNode.value) {
-        
         return
     }
     
     const spend = parseInt(spendInputNode.value)
     spendInputNode.value = ''
-    
     
     const currentCategory = getSelectedCategory ()
     if (currentCategory === 'Категории') {
@@ -65,34 +66,14 @@ addButtonNode.addEventListener ('click', function () {
         return
     } else {
         nonSelectedCategoryNode.setAttribute ('hidden', '')
-        
-        
         const newSpend = {currentSpend: spend, category: selectedCategoryNode.value}
 
-        // console.log (newSpend)
-        
         spending.push (newSpend)
-        // saveHistoryToStorage ()
-
-        // console.log (spending)
+        saveHistoryToStorage ()
     
         render (spending)
-
-        console.log (spend)
-
     }
-    
 })
-
-
-
-// function getHistoryFromStorage () {
-//     const spendingFromStorageString = localStorage.getItem (STORAGE_HISTORY)
-//     const spendingStorage = JSON.parse (spendingFromStorageString)
-//     spending = spendingStorage
-// }
-
-
 
 cancelButtonNode.addEventListener ('click', function () {
     cancelHistory (historyNode)
@@ -130,56 +111,36 @@ setLimitBtnNode.addEventListener ('click', function () {
     localStorage.setItem(STORAGE_LIMIT, LIMIT)
 
     render (spending)
-
-    
-    
 })
 
-// сделать отрисовку истории
-
 function init(spending) {addButtonNode
-    
-
     if (!localStorage.getItem(STORAGE_LIMIT)) {
         limitNode.innerText = LIMIT
     } else {
         LIMIT = localStorage.getItem (STORAGE_LIMIT)
         limitNode.innerText = localStorage.getItem (STORAGE_LIMIT)
-        
-
     }
-    // getHistoryFromStorage (spending)
     statusNode.innerText = STATUS_IN_LIMIT
     totalSumNode.innerText = calculateSpending (spending)
-    
 }
-
 
 function getLimitValue () {
     LIMIT = limitInputNode.value
-    
 }
-
-const spend = getSpendFromInput()
 
 function getSpendFromInput () {
     if (!spendInputNode.value) {
         return null
     }
-    
     const spend = parseInt(spendInputNode.value)
-    
-    
     spendInputNode.value = ''
-    
     return spend
-    
 }
 
 function cancelHistory () {
     spending.splice (0)
+    localStorage.removeItem (STORAGE_HISTORY)
 }
-
 
 function renderHistory (spending) {
     let spendingListHTML = ''
