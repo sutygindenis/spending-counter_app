@@ -19,6 +19,7 @@ const limitNode = document.querySelector ('.js-limit')
 const statusNode = document.querySelector ('.js-status')
 const selectedCategoryNode = document.querySelector ('.js-selected-category')
 const nonSelectedCategoryNode = document.querySelector ('.js-non-selected-category')
+const nonInputedSpendNode = document.querySelector ('.js-non-inputed-spend')
 
 
 const bodyNode = document.querySelector('body');
@@ -54,8 +55,11 @@ function saveHistoryToStorage () {
 addButtonNode.addEventListener ('click', function () {
     
     if (!spendInputNode.value) {
+        nonInputedSpendNode.removeAttribute ('hidden', '')
         return
     }
+
+    nonInputedSpendNode.setAttribute ('hidden', '')
     
     const spend = parseInt(spendInputNode.value)
     spendInputNode.value = ''
