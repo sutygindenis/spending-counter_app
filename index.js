@@ -190,3 +190,4 @@ function render (spending) {
 function getSelectedCategory () {
     return selectedCategoryNode.value
 }
+//
