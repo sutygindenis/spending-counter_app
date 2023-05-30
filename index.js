@@ -62,7 +62,6 @@ addButtonNode.addEventListener ('click', function () {
     nonInputedSpendNode.setAttribute ('hidden', '')
     
     const spend = parseInt(spendInputNode.value)
-    spendInputNode.value = ''
     
     const currentCategory = getSelectedCategory ()
     if (currentCategory === 'Категории') {
@@ -71,12 +70,13 @@ addButtonNode.addEventListener ('click', function () {
     } else {
         nonSelectedCategoryNode.setAttribute ('hidden', '')
         const newSpend = {currentSpend: spend, category: selectedCategoryNode.value}
-
+        
         spending.push (newSpend)
         saveHistoryToStorage ()
-    
+        
         render (spending)
     }
+    spendInputNode.value = ''
 })
 
 cancelButtonNode.addEventListener ('click', function () {
