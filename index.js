@@ -2,6 +2,7 @@ const CURRECY = ' руб.'
 const STATUS_IN_LIMIT = 'Все хорошо'
 const STATUS_OUT_OF_LIMIT = 'Все плохо'
 const STATUS_OUT_OF_LIMIT_CLASSNAME = 'status-red'
+const DEFAULT_SELECTED_CATEGORY = 'Категории'
 const POPUP_OPENED = 'popup_open'
 const BODY_FIXED = 'body_fixed'
 const STORAGE_LIMIT = 'lastSetLimit'
@@ -77,6 +78,7 @@ addButtonNode.addEventListener ('click', function () {
         render (spending)
     }
     spendInputNode.value = ''
+    selectedCategoryNode.value = DEFAULT_SELECTED_CATEGORY
 })
 
 cancelButtonNode.addEventListener ('click', function () {
