@@ -7,6 +7,7 @@ const POPUP_OPENED = 'popup_open'
 const BODY_FIXED = 'body_fixed'
 const STORAGE_LIMIT = 'lastSetLimit'
 const STORAGE_HISTORY = 'history'
+const DEFAULT_LIMIT = 10000
 
 
 const spendInputNode = document.querySelector ('.js-spend-input')
@@ -30,7 +31,7 @@ const changeLimitBtnNode = document.querySelector ('.js-change-limit-btn')
 const changeLimitBtnCloseNode = document.querySelector('.js-change-limit-popup-close-btn');
 const setLimitBtnNode = document.querySelector ('.Js-popup-set-limit-btn')
 
-let LIMIT = 10000
+let LIMIT = DEFAULT_LIMIT
 
 
 let spending = []
@@ -53,7 +54,9 @@ function saveHistoryToStorage () {
     localStorage.setItem(STORAGE_HISTORY, spendingStorageString)
 }
 
-addButtonNode.addEventListener ('click', function () {
+addButtonNode.addEventListener ('click', addSpendToHistory )
+
+function addSpendToHistory () {
     
     if (!spendInputNode.value) {
         nonInputedSpendNode.removeAttribute ('hidden', '')
@@ -79,12 +82,18 @@ addButtonNode.addEventListener ('click', function () {
     }
     spendInputNode.value = ''
     selectedCategoryNode.value = DEFAULT_SELECTED_CATEGORY
-})
+}
 
-cancelButtonNode.addEventListener ('click', function () {
-    cancelHistory (historyNode)
+
+
+function clearHistory () {
+    LIMIT = DEFAULT_LIMIT
+    removeSpendingFromHistory (historyNode)
+    removeSavedLocalStorage ()
     render (spending)
-})
+}
+
+cancelButtonNode.addEventListener ('click', clearHistory)
 
 // Popup
 
@@ -143,9 +152,13 @@ function getSpendFromInput () {
     return spend
 }
 
-function cancelHistory () {
+function removeSpendingFromHistory () {
     spending.splice (0)
+}
+
+function removeSavedLocalStorage () {
     localStorage.removeItem (STORAGE_HISTORY)
+    localStorage.removeItem (STORAGE_LIMIT)
 }
 
 function renderHistory (spending) {
