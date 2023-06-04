@@ -36,7 +36,7 @@ let LIMIT = DEFAULT_LIMIT
 
 let spending = []
 
-const getHistoryFromStorage = function () {
+getHistoryFromStorage = function () {
     const spendingFromStorageString = localStorage.getItem (STORAGE_HISTORY)
     const spendingStorage = JSON.parse (spendingFromStorageString)
     spending = spendingStorage
@@ -44,7 +44,7 @@ const getHistoryFromStorage = function () {
 
 const spend = getSpendFromInput()
 
-if (localStorage.history) {
+if (!!localStorage.history) {
     getHistoryFromStorage ()
 }
 render (spending)
@@ -164,8 +164,6 @@ function removeSavedLocalStorage () {
 function renderHistory (spending) {
     let spendingListHTML = ''
     
-    const newSpend = {currentSpend: spend, category: selectedCategoryNode.value}
-
     spending.forEach(newSpend => {
         spendingListHTML += `<li>${newSpend.category} - ${newSpend.currentSpend} ${CURRECY}</li>`
     });
