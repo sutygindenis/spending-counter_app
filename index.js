@@ -65,7 +65,7 @@ function addSpendToHistory () {
     if (!spendInputNode.value) {
         nonInputedSpendNode.removeAttribute ('hidden', '');
         return;
-    }
+    };
 
     nonInputedSpendNode.setAttribute ('hidden', '');
     
@@ -84,8 +84,8 @@ function addSpendToHistory () {
         
         render (spending);
     }
-    spendInputNode.value = ''
-    selectedCategoryNode.value = DEFAULT_SELECTED_CATEGORY
+    spendInputNode.value = '';
+    selectedCategoryNode.value = DEFAULT_SELECTED_CATEGORY;
 };
 
 
@@ -120,7 +120,7 @@ function togglePopup() {
 setLimitBtnNode.addEventListener ('click', function () {
     if (!limitInputNode.value) {
         return;
-    }
+    };
 
     LIMIT = parseInt(limitInputNode.value);
     limitInputNode.value = '';
@@ -138,7 +138,7 @@ function init(spending) {
     } else {
         LIMIT = localStorage.getItem (STORAGE_LIMIT);
         limitNode.innerText = localStorage.getItem (STORAGE_LIMIT);
-    }
+    };
     statusNode.innerText = STATUS_IN_LIMIT;
     totalSumNode.innerText = calculateSpending (spending);
 };
@@ -150,7 +150,7 @@ function getLimitValue () {
 function getSpendFromInput () {
     if (!spendInputNode.value) {
         return null;
-    }
+    };
     const spend = parseInt(spendInputNode.value);
     spendInputNode.value = '';
     return spend;
@@ -199,7 +199,7 @@ function renderStatus (spending) {
     } else {
         statusNode.innerText = `${STATUS_OUT_OF_LIMIT} (${LIMIT - sum} ${CURRECY})`;
         statusNode.classList.add(STATUS_OUT_OF_LIMIT_CLASSNAME);
-    }
+    };
 };
 
 function render (spending) {
