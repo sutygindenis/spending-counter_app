@@ -15,85 +15,89 @@
     <section>
         <h1><b>Учет расходов</b></h1>
         <div class="container">
-            <div class="input-box-wraper">
-                <div class="input-value-box">
-                    <div class="value-input curency">
-                        <input
-                            class="input js-spend-input"
-                            type=number
-                            pattern = "[0-9]"
-                            inputmode="numeric"
-                            min= 1
-                            name=""
-                            id=""
-                            placeholder="100">
+            <div class="first-col">
+                <div class="input-box-wraper">
+                    <div class="input-value-box">
+                        <div class="value-input curency">
+                            <input
+                                class="input js-spend-input"
+                                type=number
+                                pattern = "[0-9]"
+                                inputmode="numeric"
+                                min= 1
+                                name=""
+                                id=""
+                                placeholder="100">
+                        </div>
+                        <div class="alert-box">
+                            <p class="js-non-inputed-spend" hidden>* введите сумму</p>
+                        </div>
                     </div>
-                    <div class="alert-box">
-                        <p class="js-non-inputed-spend" hidden>* введите сумму</p>
-                    </div>
-                </div>
-                <div class="select-box">
-                    <div class="select-category">
-                        <select class="js-selected-category" name="" id="">
-                            <option disabled="" hidden="" selected="">Категории</option>
-                            <option value="Транспорт">Транспорт</option>
-                            <option value="Кафе и рестораны">Кафе и рестораны</option>
-                            <option value="Аптека">Аптека</option>
-                            <option value="Развлечения">Развлечения</option>
-                            <option value="Разное">Разное</option>
-                        </select>
-                    </div>
-                    <div class="alert-box">
-                        <p class="js-non-selected-category" hidden>* выберите категорию</p>
-                    </div>
-                </div>
-            </div>
-            <button class="js-add-button">Добавить</button>
-            <div class="info-col">
-                <div class="limit-box">
-                    <div class="limit curency">
-                        <span class="label"><b>Лимит:</b></span>
-                        <span class="js-limit"></span>
-                    </div>
-                    <button class="js-change-limit-btn"></button>
-                    <div class="change-limit-popup">
-                        <div class="js-popup-content ">
-                            <h2 class="popup-title">Новый лимит</h2>
-
-                            <div class="limit-control">
-                                <div class="input-value-box">
-                                    <div class="value-input curency">
-                                        <input
-                                            class="input js-limit-input"
-                                            type="number"
-                                            min="100"
-                                            name=""
-                                            id=""
-                                            placeholder="100">
-                                    </div>
-                                </div>
-                                <button class="Js-popup-set-limit-btn">Задать лимит</button>
-                            </div>
-                            <button class="js-change-limit-popup-close-btn"></button>
+                    <div class="select-box">
+                        <div class="select-category">
+                            <select class="js-selected-category" name="" id="">
+                                <option disabled="" hidden="" selected="">Категории</option>
+                                <option value="Транспорт">Транспорт</option>
+                                <option value="Кафе и рестораны">Кафе и рестораны</option>
+                                <option value="Аптека">Аптека</option>
+                                <option value="Развлечения">Развлечения</option>
+                                <option value="Разное">Разное</option>
+                            </select>
+                        </div>
+                        <div class="alert-box">
+                            <p class="js-non-selected-category" hidden>* выберите категорию</p>
                         </div>
                     </div>
                 </div>
-                <div class="total curency">
-                    <span class="label"><b>Всего:</b></span>
-                    <span class="js-total"></span>
+                <div class="info-col">
+                    <div class="limit-box">
+                        <div class="limit curency">
+                            <span class="label"><b>Лимит:</b></span>
+                            <span class="js-limit"></span>
+                        </div>
+                        <button class="js-change-limit-btn"></button>
+                        <div class="change-limit-popup">
+                            <div class="js-popup-content ">
+                                <h2 class="popup-title">Новый лимит</h2>
+                                
+                                <div class="limit-control">
+                                    <div class="input-value-box">
+                                        <div class="value-input curency">
+                                            <input
+                                                class="input js-limit-input"
+                                                type="number"
+                                                min="100"
+                                                name=""
+                                                id=""
+                                                placeholder="100">
+                                            </div>
+                                        </div>
+                                        <button class="Js-popup-set-limit-btn">Задать лимит</button>
+                                    </div>
+                                    <button class="js-change-limit-popup-close-btn"></button>
+                                </div>
+                            </div>
+                        </div>
+                    <div class="total curency">
+                        <span class="label"><b>Всего:</b></span>
+                        <span class="js-total"></span>
+                    </div>
+                    <div class="status">
+                        <span class="label"><b>Статус:</b></span>
+                        <span class="js-status status-green"></span>
+                    </div>
                 </div>
-                <div class="status">
-                    <span class="label"><b>Статус:</b></span>
-                    <span class="js-status status-green"></span>
-                </div>
+                <button class="js-cancel-button">Сбросить расходы</button>
             </div>
-            <div class="history-col">
-                <span class="history"><b>История:</b></span>
-                <ol class="js-history"></ol>
+            <div class="second-col">
+                <button class="js-add-button">Добавить</button>
+                <div class="history-col">
+                    <span class="history"><b>История:</b></span>
+                    <ol class="js-history"></ol>
+                </div>
             </div>
         </div>
 
-        <button class="js-cancel-button">Сбросить расходы</button>
     </section>
     <script src="./index.js"></script>
 </body>

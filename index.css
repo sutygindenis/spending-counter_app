@@ -20,8 +20,8 @@ b {
 }
 
 section {
-    width: 1400px;
-    padding: 67px 0 0 286px;
+    width: 100%;
+    padding: 67px 0 0 240px;
     /* display: flex;
     justify-content: center;
     align-items: center;
@@ -45,6 +45,12 @@ h1 {
     row-gap: 50px;
 
     /* margin: 0 auto ; */
+}
+
+.second-col {
+    display: flex;
+    flex-direction: column;
+    gap: 150px;
 }
 
 .input-box-wraper {
